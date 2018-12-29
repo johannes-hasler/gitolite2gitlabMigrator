@@ -12,10 +12,10 @@ public class CLIParameters implements Callable<Void>{
     @CommandLine.Option(names = {"-c", "--c", "-conf", ".-conf"}, required = true, description = "The Path to the gitolite.conf")
     private String pathToGitoliteConf;
 
-    @CommandLine.Option(names = {"-u", "--u", "-url", "--url"}, /*required = true,*/ description = "The base url of GitLab")
+    @CommandLine.Option(names = {"-u", "--u", "-url", "--url"}, required = true, description = "The base url of GitLab")
     private String gitlabURL;
 
-    @CommandLine.Option(names = {"-t", "--t", "-token", "--token"}, /*required = true,*/ description = "The authenication token for GitLab")
+    @CommandLine.Option(names = {"-t", "--t", "-token", "--token"}, required = true, description = "The authentication token for GitLab")
     private String gitlabToken;
 
     public static void main(String[] args) {
