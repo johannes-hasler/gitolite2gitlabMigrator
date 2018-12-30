@@ -83,7 +83,8 @@ public class GitoliteConfigParser {
             }
 
             if(line.contains("\"")){
-                //TODO Handle gitweb config
+//                if(line.contains(DESCRIPTION))
+//                //TODO Handle gitweb config
                 continue;
             }
             String[] splittedLine = line.split("=");

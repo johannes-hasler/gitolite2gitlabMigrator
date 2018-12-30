@@ -17,8 +17,9 @@ public class GitlabService {
     String gitSuffix = ".git";
     String mailSuffix = "@syngenio.de";
 
-    public void migrate(ConfigData data, String url, String token){
+    public void migrate(ConfigData data, String url, String token, String gitoliteBasePath){
         GitLabApi gitLabApi = new GitLabApi(url, token);
+        this.gitolitebasePath = gitoliteBasePath;
         addUsers(gitLabApi,data);
         addGroups(gitLabApi,data);
         addProjects(gitLabApi, data);
@@ -141,8 +142,9 @@ public class GitlabService {
                     .withName(entry.getKey())
                     .withVisibility(Visibility.PRIVATE)
                     .withDescription(repo.getGitWebDescription());
-            //Experimental
-            //project.setHttpUrlToRepo(gitolitebasePath+repo.getName()+gitSuffix);
+
+
+
             Set<Accessor> members = new HashSet<>();
             Accessor owner = repo.isOwnedByAccessor();
             if(owner != null){
@@ -157,7 +159,11 @@ public class GitlabService {
                 }
             }
             try {
-                project = projectApi.createProject(project);
+                if(gitolitebasePath != null && !gitolitebasePath.isEmpty()){
+                    project = projectApi.createProject(project, gitolitebasePath+repo.getName()+gitSuffix);
+                }
+                else
+                    project = projectApi.createProject(project);
             }
             catch (GitLabApiException e){
 

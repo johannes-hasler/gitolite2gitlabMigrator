@@ -18,6 +18,9 @@ public class CLIParameters implements Callable<Void>{
     @CommandLine.Option(names = {"-t", "--t", "-token", "--token"}, required = true, description = "The authentication token for GitLab")
     private String gitlabToken;
 
+    @CommandLine.Option(names = {"-g", "--g", "-gitolite", "--gitolite"}, required = true, description = "The baseurl of gitolite including credentials and trailing slash")
+    private String gitoliteBasePath;
+
     public static void main(String[] args) {
         CommandLine.call(new CLIParameters(), args);
     }
@@ -31,23 +34,15 @@ public class CLIParameters implements Callable<Void>{
         return pathToGitoliteConf;
     }
 
-    public void setPathToGitoliteConf(String pathToGitoliteConf) {
-        this.pathToGitoliteConf = pathToGitoliteConf;
-    }
-
     public String getGitlabURL() {
         return gitlabURL;
-    }
-
-    public void setGitlabURL(String gitlabURL) {
-        this.gitlabURL = gitlabURL;
     }
 
     public String getGitlabToken() {
         return gitlabToken;
     }
 
-    public void setGitlabToken(String gitlabToken) {
-        this.gitlabToken = gitlabToken;
+    public String getGitoliteBasePath() {
+        return gitoliteBasePath;
     }
 }
